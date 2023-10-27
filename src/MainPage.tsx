@@ -1,25 +1,22 @@
 import React from 'react';
-import PokemonList from './components/PokemonList';
+import ItemList from './components/ItemList';
 import Search from './components/Search';
 
 export default class MainPage extends React.Component {
 	state = {
-		pokemons: []
+		items: []
 	};
-	componentDidMount() {
-		fetch(`https://pokeapi.co/api/v2/pokemon`)
+
+	loadPokemon = (string : string) => {
+		fetch(`https://rickandmortyapi.com/api/character`)
 		.then(response => response.json())
-		.then(data => this.setState({pokemons: data.results}));
-		
-	}
-	searchPokemon = (string : string) => {
-		string
+		.then(data => this.setState({items: data.results}));
 	}
  	render() {
 		return(
 			<>
-				<Search />
-				<PokemonList pokemons={this.state.pokemons}/>
+				<Search loadPokemon={this.loadPokemon}/>
+				<ItemList items={this.state.items}/>
 			</>
 		)
  }
