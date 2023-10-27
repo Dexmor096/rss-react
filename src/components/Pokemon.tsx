@@ -6,7 +6,7 @@ export default class Pokemon extends React.Component {
 	}
 		render() {
 			return (
-				<span>This is a Pokemon</span>
+				<p className='list-item'>This is a {this.props.name}</p>
 			)
 		}
 }
