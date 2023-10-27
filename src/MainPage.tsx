@@ -12,6 +12,9 @@ export default class MainPage extends React.Component {
 		.then(data => this.setState({pokemons: data.results}));
 		
 	}
+	searchPokemon = (string : string) => {
+		string
+	}
  	render() {
 		return(
 			<>
