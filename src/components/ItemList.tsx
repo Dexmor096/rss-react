@@ -8,7 +8,7 @@ export default class ItemList extends React.Component<ItemListProps> {
 		return(
 			<div className='list'>
 				{items.map(item => (
-					<Item key={item.name} {...item}/>
+					<Item key={item.id} {...item}/>
 
 				))}
 			</div>

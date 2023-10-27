@@ -8,7 +8,12 @@ export default class Search extends React.Component<SearchProps> {
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ searchValue: e?.target.value });
 	}
-	handleSearch = () => {
+	handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			this.props.loadPokemon(this.state.searchValue)
+		}
+	}
+	handleClick = () => {
 		this.props.loadPokemon(this.state.searchValue)
 	}
 	render(): React.ReactNode {
@@ -23,8 +28,9 @@ export default class Search extends React.Component<SearchProps> {
 							type="text" 
 							value={this.state.searchValue}
 							onChange={this.handleChange}
+							onKeyDown={this.handleKey}
 							/>
-  	        <button onClick={this.handleSearch}>Load</button>
+  	        <button onClick={this.handleClick}>Load</button>
   	      </div>
 			</>
 		)

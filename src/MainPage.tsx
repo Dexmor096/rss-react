@@ -8,9 +8,10 @@ export default class MainPage extends React.Component {
 	};
 
 	loadPokemon = (string : string) => {
-		fetch(`https://rickandmortyapi.com/api/character`)
+		fetch(`https://rickandmortyapi.com/api/character/?name=${string}`)
 		.then(response => response.json())
-		.then(data => this.setState({items: data.results}));
+		.then(data => this.setState({items: data.results}))
+		.catch(Error)
 	}
  	render() {
 		return(
