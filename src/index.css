@@ -70,7 +70,8 @@ button:focus-visible {
   align-items: center;
   margin-top: 2em;
 }
-.list-item {
+.not-found {
+  display: block;
 }
 @media (prefers-color-scheme: light) {
   :root {
