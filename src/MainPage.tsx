@@ -10,7 +10,7 @@ export default class MainPage extends React.Component {
 	};
 
 	loadPokemon = (string : string) => {
-		this.setState({isLoading: true})
+		this.setState({isLoading: true, isError: false})
 		fetch(`https://rickandmortyapi.com/api/character/?name=${string}`)
 		.then(response => {
 			if (!response.ok) {
