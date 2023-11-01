@@ -3,7 +3,8 @@ import { SearchProps } from '../../../types'
 
 export default class Search extends React.Component<SearchProps> {
 	state= {
-		searchValue: ''
+		searchValue: '',
+		hasError: null
 	}
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ searchValue: e?.target.value });
@@ -13,8 +14,16 @@ export default class Search extends React.Component<SearchProps> {
 			this.props.loadPokemon(this.state.searchValue)
 		}
 	}
+	handleError = () => {
+		this.setState({ hasError: true });
+	}
 	handleClick = () => {
 		this.props.loadPokemon(this.state.searchValue)
+	}
+	componentDidUpdate() {
+		if (this.state.hasError) {
+			throw new Error("ErrorBoundler");
+		}
 	}
 	render(): React.ReactNode {
 
@@ -31,6 +40,7 @@ export default class Search extends React.Component<SearchProps> {
 							onKeyDown={this.handleKey}
 							/>
   	        <button onClick={this.handleClick}>Load</button>
+						<button onClick={this.handleError}>Catch Error</button>
   	      </div>
 			</>
 		)

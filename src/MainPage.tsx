@@ -1,4 +1,5 @@
 import React from 'react';
+// import { ThrowedError } from '../../types'
 import ItemList from './components/ItemList';
 import Search from './components/Search';
 
@@ -6,9 +7,7 @@ export default class MainPage extends React.Component {
 	state = {
 		items: [],
 		isLoading: false,
-		isError: false
 	};
-
 	loadPokemon = (string : string) => {
 		this.setState({isLoading: true, isError: false})
 		fetch(`https://rickandmortyapi.com/api/character/?name=${string}`)
@@ -19,20 +18,22 @@ export default class MainPage extends React.Component {
 			return response.json()
 		})
 		.then(data => this.setState({items: data.results, isLoading: false}))
-		.catch(error => {
-			console.error('Error', error)
-			this.setState({isError: true, isLoading: false})
+		.catch(() => {
+			this.setState({isLoading: false})
 		})
 	}
+
  	render() {
 		return(
 			<>
-				<Search loadPokemon={this.loadPokemon}/>
+				<Search 
+					loadPokemon={this.loadPokemon}
+				/>
 				{ this.state.isLoading ? (<h3>Loading ...</h3>) : 
-				<ItemList 
-					items={this.state.items}
-					isLoading={this.state.isLoading} 
-					isError={this.state.isError}/>
+						<ItemList 
+							items={this.state.items}
+							isLoading={this.state.isLoading} 
+							/>
 				}
 			</>
 		)

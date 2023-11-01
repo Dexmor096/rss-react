@@ -5,10 +5,10 @@ import NotFound from './404'
 
 export default class ItemList extends React.Component<ItemListProps> {
 	render() {
-		const {items = [], isError} = this.props;
+		const {items = [], isLoading} = this.props;
 		return(
 			<div className='list'>
-				{!isError ? items.map(item => (
+				{!isLoading ? items.map(item => (
 					<Item key={item.id} {...item}/>
 
 				)) : <NotFound />
