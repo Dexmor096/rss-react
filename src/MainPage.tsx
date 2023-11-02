@@ -17,7 +17,7 @@ export const MainPage: React.FC = () => {
 			}
 			return response.json()
 		})
-		.then(data => setItems(data.results))
+		.then(data => (setItems(data.results), setIsloading(false)))
 		.catch(() => {
 			setIsloading(false)
 		})
