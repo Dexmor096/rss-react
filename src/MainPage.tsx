@@ -1,15 +1,15 @@
 import React from 'react';
-// import { ThrowedError } from '../../types'
-import ItemList from './components/ItemList';
+import { useState } from 'react'
+ // import { ThrowedError } from '../../types'
+import { ItemList } from './components/ItemList';
 import Search from './components/Search';
 
-export default class MainPage extends React.Component {
-	state = {
-		items: [],
-		isLoading: false,
-	};
-	loadPokemon = (string : string) => {
-		this.setState({isLoading: true, isError: false})
+export const MainPage: React.FC = () => {
+	const [ items, setItems ] = useState([]);
+	const [ isLoading, setIsloading ]= useState(false)
+
+	const loadPokemon = (string : string) => {
+		setIsloading(true)
 		fetch(`https://rickandmortyapi.com/api/character/?name=${string}`)
 		.then(response => {
 			if (!response.ok) {
@@ -17,25 +17,23 @@ export default class MainPage extends React.Component {
 			}
 			return response.json()
 		})
-		.then(data => this.setState({items: data.results, isLoading: false}))
+		.then(data => setItems(data.results))
 		.catch(() => {
-			this.setState({isLoading: false})
+			setIsloading(false)
 		})
 	}
 
- 	render() {
 		return(
 			<>
 				<Search 
-					loadPokemon={this.loadPokemon}
+					loadPokemon={loadPokemon}
 				/>
-				{ this.state.isLoading ? (<h3>Loading ...</h3>) : 
+				{ isLoading ? (<h3>Loading ...</h3>) : 
 						<ItemList 
-							items={this.state.items}
-							isLoading={this.state.isLoading} 
+							items={items}
+							isLoading={isLoading} 
 							/>
 				}
 			</>
 		)
- }
 }
